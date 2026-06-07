@@ -28,14 +28,15 @@ Run `Difteris.py`:
 
 ### Step 3: Configure Settings
 When the server starts for the first time (or can't find config.json) it will make a config file in 'data/'. Restart the server after any change.  
-<img width="250" height="auto" alt="image" src="https://github.com/user-attachments/assets/6cf09d3e-c4f1-46e1-8051-2a7f94e5de71" />  
+<img width="250" height="auto" alt="image" src="https://github.com/user-attachments/assets/5e914f6e-c0f3-45e4-ad33-e447cf836d82" />
 Settings Explaination:  
 - Version: Its the version of the server.  
-- Web interface: Controls if the web interface is accessible. (WIP)  
-- Veteris API: Controls if the server responds to veteris requests. (WIP)  
+- Web interface: Controls if the web interface is accessible.  
+- Veteris API: Controls if the server responds to veteris requests.  
 - App icons: If false, server will just send a 2x2 image of white instead of images.  
 - Use Online Info: If true, the server will send requests to apple using an apps bundleID to get information like the description and genre.  
-- On device install via web: If true, users can (most likely if the plist generates correctly) install apps directly from web interface if they have appsync installed. (WIP)  
+- On device install via web: If true, users can (most likely if the plist generates correctly) install apps directly from web interface if they have appsync installed.
+- Source: This is the ip address used for on device install via web. Enter the protocol (http/https), public or private ip address and port 5010 for the server hosting difteris.
 
 ### Step 4: Add IPAs
 Simply move the ipas you want to add to the 'ipas/' folder and the server will automatically process and move them.
