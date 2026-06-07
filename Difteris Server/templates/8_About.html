@@ -1,0 +1,50 @@
+{% extends "1_Base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<table class="about_table">
+	<tr>
+		<td>
+			Server Version:
+		</td>
+		<td>
+			{{ version }}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Apps:
+		</td>
+		<td>
+			{{ total_apps }}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			On Device Install:
+		</td>
+		<td>
+			{{ odi }}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Veteris API:
+		</td>
+		<td>
+			{{ vet }}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			App icons:
+		</td>
+		<td>
+			{{ app_icons }}
+		</td>
+	</tr>
+</table>
+
+{% endblock %}

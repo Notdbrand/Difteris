@@ -1,0 +1,63 @@
+{% extends "1_Base.html" %}
+
+{% block title %}{{ app.name }}{% endblock %}
+
+{% block content %}
+
+<table class="app_details_header">
+	<tr>
+		<th>
+			<img src="{{ app.iconurl }}" alt="{{ app.name }}" class="app-icon">
+		</th>
+		<th>
+			<div class="app_details">
+				<p class="app_name">{{ app.name }}</p>
+				<p class="app_bundleid">{{ app.bundleid }}</p>
+			</div>
+		</th>
+	</tr>
+</table>
+
+<br>
+<h3>Description:</h3>
+<div>
+	<p class="app_des">{{ app.description|replace('\n', '<br>')|safe }}</p>
+</div>
+
+<br>
+<h3>Downloads:</h3>
+<table class="app_details_download">
+	<tr>
+		<th>
+			Version:
+		</th>
+		<th>
+			MinOS:
+		</th>
+		<th>
+			File:
+		</th>
+		<th>
+			OnDevice:
+		</th>
+		
+	</tr>
+	{% for version_info in app.versions %}
+		<tr>
+			<td>
+				<p>{{ version_info.app_version }}</p>
+			</td>
+			<td>
+				<p>{{ version_info.minIOS }}</p>
+			</td>
+			<td>
+				<a href="/ipas/{{ version_info.minIOS }}/{{ version_info.file }}" class="install-btn">Download</a>
+			</td>
+			<td>
+				<a href="itms-services://?action=download-manifest&url=http://192.168.1.125:5010/plist/{{ app.bundleid }}/{{ version_info.minIOS }}/{{ version_info.app_version }}/{{ version_info.file }}" class="install-btn">Install</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

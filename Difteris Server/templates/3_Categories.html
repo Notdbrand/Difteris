@@ -1,0 +1,14 @@
+{% extends "1_Base.html" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+
+{% for category in categories %}
+	<a href="/category/{{ category['id'] }}" class="category-item">
+		<span class="category-name">{{ category['name'] }}</span>
+	</a>
+	<br>
+{% endfor %}
+
+{% endblock %}

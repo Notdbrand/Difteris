@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Difteris - {{ section }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="/static/assets/icon.png" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="80x80" href="/static/assets/icon.png">
+	<meta property="og:title" content="Difteris" />
+	<meta property="og:description" content="Brought to you by Notdbrand!" />
+	<meta content="#FFFFFF" data-react-helmet="true" name="theme-color" />
+</head>
+<body>
+    <div class="top-bar">
+		{% if back %}
+			<img src="/static/Assets/back.png" id="go-back" onclick="goBack()">
+		{% endif %}
+        <h1>{{ section }}</h1>
+    </div>
+	
+	<div class="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+    <div class="bottom-bar">
+		<table>
+			<tr>
+				<th>
+					<div class="bottom-bar-nav-button">
+						<a href="/" class="bottom-bar-nav-button-text">
+							<img class="bottom-bar-nav-button-img" src="/static/Assets/home.png">
+						</a>
+					</div>
+				</th>
+				<th>
+					<div class="bottom-bar-nav-button">
+						<a href="/categories" class="bottom-bar-nav-button-text">
+							<img class="bottom-bar-nav-button-img" src="/static/Assets/categories.png">
+						</a>
+					</div>
+				</th>
+				<th>
+					<div class="bottom-bar-nav-button">
+						<a href="/search" class="bottom-bar-nav-button-text">
+							<img class="bottom-bar-nav-button-img" src="/static/Assets/search.png">
+						</a>
+					</div>
+				</th>
+				<th>
+					<div class="bottom-bar-nav-button">
+						<a href="/about" class="bottom-bar-nav-button-text">
+							<img class="bottom-bar-nav-button-img" src="/static/Assets/about.png">
+						</a>
+					</div>
+				</th>
+			</tr>
+		</table>
+    </div>
+	
+	<script>
+		function goBack() {
+			history.back();
+		}
+	</script>
+	
+</body>
+</html>

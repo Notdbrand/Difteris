@@ -1,0 +1,31 @@
+{% extends "1_Base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<form action="/search" method="get" class="app_search">
+	<input type="text" name="query" placeholder="{{ placeholder }}" required>
+</form>
+<br>
+<div>
+{% for search_app in search_apps %}
+
+	<a class="app_list" href="/app/{{ search_app.bundleid }}">
+	<table>
+		<tr>
+			<th class="app_list_th">
+				<img class="app_list_icon" src="{{ search_app.iconurl }}">
+			</th>
+			<th>
+				<p class="app_list_name">{{ search_app.name }}</p>
+				<p class="app_list_bundleid">{{ search_app.bundleid }}</p>
+			</th>
+		</tr>
+	</table>
+	</a>
+	<br>
+
+{% endfor %}
+</div>
+{% endblock %}

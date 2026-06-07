@@ -1,0 +1,228 @@
+body {
+	background-color: #CCD1DA;
+	background-image: url("/static/Assets/background.png");
+	background-repeat: repeat;
+	background-position: right top;
+	background-size: auto;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, p {
+	margin: 0;
+	padding: 0;
+}
+
+.top-bar {
+	position: fixed;
+	top: 0px;
+	height: 44px;
+	width: 100%;
+	background-color: #758CAB;
+	background-image: url("/static/Assets/top-bar.png");
+	background-repeat: repeat;
+	background-position: right top;
+	background-size: 1px 44px;
+}
+
+.top-bar h1 {
+	text-align: center;
+	font-size: 1.2rem;
+	line-height: 44px;
+	color: white;
+}
+
+#go-back {
+	position: fixed;
+	top: 8px;
+	left: 4px;
+	width: 44px;
+}
+
+.bottom-bar {
+	position: fixed;
+    bottom: 0;
+	height: 44px;
+	width: 100%;
+	background-color: #323232;
+	background-image: url("/static/Assets/bottom-bar.png");
+	background-repeat: repeat;
+	background-position: right top;
+	background-size: 1px 44px;
+}
+
+.bottom-bar img {
+	height: 26px;
+	width: 26px;
+}
+
+.bottom-bar table {
+	height: 44px;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.bottom-bar a {
+	margin: 0;
+	color: white;
+	text-decoration: none;
+	font-size: 1rem;
+}
+
+.content{
+	height: 100%;
+	margin: 55px 10px 55px;
+	max-width: 470px;
+}
+@media screen and (min-width: 480px) {
+	.content {
+		margin: 55px auto 55px;
+	}
+}
+
+
+/* App list container */
+
+.app_list {
+	color: black;
+	text-decoration: none;
+	font-size: 1rem;
+	text-align: left;
+}
+
+.app_list table {
+	max-width: 320px;
+	width: 100%;
+	background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid darkgrey;
+}
+.app_list th {
+	overflow: hidden;
+}
+
+.app_list_th {
+	width: 87px;
+}
+
+.app_list_icon {
+	border-radius: 10px;
+	width: 57px;
+	height: 57px;
+	vertical-align: middle;
+}
+
+.app_list_name {
+	color: black;
+	font-size: 1rem;
+}
+
+.app_list_bundleid {
+	color: darkgrey;
+	font-size: 0.8rem;
+	max-width: 200px;
+}
+
+
+/* Categories page */
+.category-item {
+	display: block;
+	max-width: 320px;
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid darkgrey;
+	color: black;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+.category-link {
+	color: black;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+/* Specific App */
+
+.app_details_header {
+	width: 100%;
+}
+
+.app-icon {
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+	float: left;
+}
+
+.app_details {
+	width: 100%;
+}
+
+.app_name {
+	color: black;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.app_bundleid {
+	color: darkgrey;
+	font-size: 0.8rem;
+	text-align: center;
+}
+
+.app_details_download {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.app_details_download td {
+	text-align: center;
+}
+
+.app_details_download th, td {
+	border-bottom: 1px solid darkgrey;
+}
+
+.app_des {
+	color: black;
+	font-size: 1rem;
+	text-align: left;
+}
+
+/* Search Page */
+.app_search {
+	display: block;
+	max-width: 320px;
+	margin: 0 auto;
+}
+
+.app_search input {
+	width: 100%;
+	padding: 4px;
+	border: 1px solid #AFAEB4;
+	border-radius: 5px;
+	background-color: white;
+	color: black;
+	box-sizing: border-box;
+}
+
+/* About Page */
+.about_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.about_table td {
+	text-align: center;
+}
+
+.about_table th, td {
+	border-top: 1px solid darkgrey;
+	border-bottom: 1px solid darkgrey;
+}

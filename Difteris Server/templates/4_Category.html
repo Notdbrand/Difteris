@@ -1,0 +1,24 @@
+{% extends "1_Base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% for app in apps %}
+<a class="app_list" href="/app/{{ app.bundleid }}">
+<table>
+	<tr>
+		<th class="app_list_th">
+			<img class="app_list_icon" src="{{ app.iconurl }}">
+		</th>
+		<th>
+			<p class="app_list_name">{{ app.name }}</p>
+			<p class="app_list_bundleid">{{ app.bundleid }}</p>
+		</th>
+	</tr>
+</table>
+</a>
+<br>
+{% endfor %}
+
+{% endblock %}

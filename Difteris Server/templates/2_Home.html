@@ -1,0 +1,26 @@
+{% extends "1_Base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% for recommended_app in recommended_apps %}
+
+<a class="app_list" href="/app/{{ recommended_app.bundleid }}">
+<table>
+	<tr>
+		<th class="app_list_th">
+			<img class="app_list_icon" src="{{ recommended_app.iconurl }}">
+		</th>
+		<th>
+			<p class="app_list_name">{{ recommended_app.name }}</p>
+			<p class="app_list_bundleid">{{ recommended_app.bundleid }}</p>
+		</th>
+	</tr>
+</table>
+</a>
+<br>
+
+{% endfor %}
+
+{% endblock %}
