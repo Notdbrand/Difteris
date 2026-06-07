@@ -1,51 +1,44 @@
 # Difteris
 
-This GitHub repository contains the code for a custom server built for Veteris 1.7.2, as well as the code and .deb file for a redirect tweak that enables Veteris to use any URL.
+This GitHub repository contains the code for a custom server built for Veteris 1.7.2 with a web interface, as well as the code and .deb file for a redirect tweak that enables Veteris to use any URL.
 
 This server is not affiliated with or endorsed by Electimon or InvoxiPlayGames. If you encounter issues, please email me or open an issue in this repository instead of contacting them.
 
+### Features:
+- Veteris Backend
+- Auto IPA processing and sorting
+- Web interface
+- IPA metadata finder using Apple
 
 ## Part 1: Difteris Server Setup
 
 ### Requirements
-- **Python 3**
-- Libraries: Flask, Pillow, packaging
+- **Python 3.11**
+- Libraries: watchdog, ipa-tool, flask, pillow, requests
   ```bash
-  pip install Flask Pillow packaging
+  pip install watchdog ipa-tool flask pillow requests
   ```
-- **.NET Core 3.1 or higher** (required for IPA Sorter)
 
 ### Step 1: Download the Difteris Server
-Download the server files and place them in your desired directory.
+Download the server files and place them in your desired directory. 
 
-### Step 2: Prepare IPA Files
-1. Place all the IPAs for your first category into the `New_IPAs` folder.
-2. Run `IPASorter.exe` from the command line. (Running via command line will display any errors.)
-    - You can also double-click it to run, but errors won't be visible.
-3. Processed IPAs will be categorised into folders based on their minimum iOS requirements. Any failed apps will be moved to the `incomplete` folder.
+### Step 2: Start the Difteris Server
+Run `Difteris.py`:
+- The server will run on port **5010** (don't change this, the tweak only modifies the IP).  
 
-**Example of folder structure:**  
-![Folder Example](https://github.com/user-attachments/assets/8139b949-cfed-48d0-a34d-d5bd9979baa2)
+### Step 3: Configure Settings
+When the server starts for the first time (or can't find config.json) it will make a config file in 'data/'. Restart the server after any change.  
+<img width="250" height="auto" alt="image" src="https://github.com/user-attachments/assets/6cf09d3e-c4f1-46e1-8051-2a7f94e5de71" />  
+Settings Explaination:  
+- Version: Its the version of the server.  
+- Web interface: Controls if the web interface is accessible. (WIP)  
+- Veteris API: Controls if the server responds to veteris requests. (WIP)  
+- App icons: If false, server will just send a 2x2 image of white instead of images.  
+- Use Online Info: If true, the server will send requests to apple using an apps bundleID to get information like the description and genre.  
+- On device install via web: If true, users can (most likely if the plist generates correctly) install apps directly from web interface if they have appsync installed. (WIP)  
 
-**Example of a processed IPA:**  
-![Processed IPA Example](https://github.com/user-attachments/assets/80b3f204-0f00-47f8-a488-1f8499c250e0)
-
-### Step 3: Index IPAs
-Run `1_Index_New_IPAS.py`:
-- Enter the name for the category you want the apps you are scanning to be put under.
-- Specify whether you want the IPAs moved automatically. If selected, the folder structure `static/ipas/(Category Name)` will be created if it doesn’t already exist and the ipas will be moved.
-
-### Step 4: Index IPA Icons
-Run `2_Index_IPA_Icons.py`:
-- This script scans all new IPAs and retrieves their icons. If an icon isn’t found, a placeholder image is used.
-- Icons are stored in `static/icons` and named using the IPA’s bundle ID.
-
-### Step 5: Start the Difteris Server
-Run `3_Difteris_Server.py`:
-- The server will run on port **5010** (this cannot currently be changed, as the tweak only modifies the IP).
-
-### Adding More IPAs
-To add additional IPAs to new or existing categories, repeat Steps 2, 3, and 4. For existing categories, ensure you type the category name exactly.
+### Step 4: Add IPAs
+Simply move the ipas you want to add to the 'ipas/' folder and the server will automatically process and move them.
 
 
 ## Part 2: Veteris Client Setup
@@ -70,6 +63,24 @@ Install Veteris Redirect:
 2. Re-enter the tweak page to ensure the address is saved.
    - Simply hitting respring won’t save the address (most of the time).
 3. Now hit the respring button.
+
+## Part 3: Difteris Web Interface
+With the web interface enabled in the config, you can just go to a web browser and enter the server's ip and port 5010.
+### Preview Screenshots:
+Homepage:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/3865ef06-7027-4de8-ace9-863ad2594e50" />  
+Categories:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/291cab31-3961-4aa6-9267-93c43bf92448" />  
+Category:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/ba0f912a-5179-474f-8468-b6db4ca490eb" />  
+App page:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/02c9aeeb-8acd-414f-8d99-f736b719bcb4" />  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/5f604f2c-115e-4f50-8c5e-062be29161e4" />  
+Search:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/3487698d-c394-43f9-9cfe-bdbe545705e9" />  
+About:  
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/0ccfe8c3-8094-49c2-9c04-d9278ea09af3" />  
+
 
 
 ## Enjoy
