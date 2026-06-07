@@ -531,7 +531,7 @@ def app_icon(bundleid):
         if os.path.exists(icon_path):
             return send_from_directory(f"static/icons/", f"{bundleid}.png")  
         return send_from_directory("data", "default.png")
-    elif config["app_icons"] == False:
+    else:
         return send_from_directory("data", "no_icon.png")
         
 @app.route('/ipas/<cat>/<ipa>', methods=['GET'])
