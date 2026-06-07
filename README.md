@@ -28,8 +28,8 @@ Run `Difteris.py`:
 
 ### Step 3: Configure Settings
 When the server starts for the first time (or can't find config.json) it will make a config file in 'data/'. Restart the server after any change.  
-<img width="250" height="auto" alt="image" src="https://github.com/user-attachments/assets/5e914f6e-c0f3-45e4-ad33-e447cf836d82" />
-Settings Explaination:  
+<img width="250" height="auto" alt="image" src="https://github.com/user-attachments/assets/5e914f6e-c0f3-45e4-ad33-e447cf836d82" />  
+Settings Explained:  
 - Version: Its the version of the server.  
 - Web interface: Controls if the web interface is accessible.  
 - Veteris API: Controls if the server responds to veteris requests.  
