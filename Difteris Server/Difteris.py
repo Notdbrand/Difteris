@@ -39,7 +39,8 @@ def setup():
         "veteris_api": True,
         "app_icons": True,
         "use_online_info": True,
-        "on_device_install_via_web": True
+        "on_device_install_via_web": False,
+        "source": ''
     }
     with open("data/config.json", "w", encoding="utf-8") as config:
         json.dump(first_config, config, indent=4)
@@ -56,7 +57,7 @@ def setup():
     image.save('data/default.png')
     image = Image.new(mode = "RGB", size = (2, 2), color = (255, 255, 255))
     draw = ImageDraw.Draw(image)
-    image.save('data/no_icons.png')
+    image.save('data/no_icon.png')
 
 def loadJson(location):
     if os.path.exists(location):
@@ -399,6 +400,20 @@ def all_categories():
 def status(): 
     return jsonify({"status": "online"}), 200
 
+def veteris_disabled_check():
+    config = loadJson("data/config.json")
+    if config["veteris_api"] == False:
+        return True
+    else:
+        return False
+
+def web_disabled_check():
+    config = loadJson("data/config.json")
+    if config["web_interface"] == False:
+        return True
+    else:
+        return False
+
 #============================#
 #                            #
 #        Veteris API         #
@@ -406,6 +421,8 @@ def status():
 #============================#
 @app.route('/1.1/client/updates', methods=['GET'])
 def update():
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     response = {
         "clientUpdates": "No updates here!"
     }
@@ -413,6 +430,8 @@ def update():
 
 @app.route('/1.1/listing/recommended', methods=['GET'])
 def recommended():
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     apps_data = loadJson("data/apps.json")
     recommended_apps = []
     
@@ -439,6 +458,8 @@ def recommended():
     
 @app.route('/1.1/listing/categories', methods=['GET'])
 def categories():
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     response = {
         "categories": all_categories()
     }
@@ -446,6 +467,8 @@ def categories():
 
 @app.route('/1.1/listing/category/<category_number>', methods=['GET'])
 def category(category_number):
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     apps_in_category = get_apps_by_category(category_number)
     if apps_in_category:
         response = { 
@@ -457,6 +480,8 @@ def category(category_number):
 
 @app.route('/1.1/listing/app/<string:bundleid>', methods=['GET'])
 def app_details(bundleid):
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     app_info = get_app_details_by_bundleid(bundleid)
     if app_info:
         return jsonify(app_info)
@@ -465,6 +490,8 @@ def app_details(bundleid):
         
 @app.route('/1.1/listing/all', methods=['GET'])
 def all_apps():
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     all_apps = get_all_apps()
     if all_apps:
         response = { 
@@ -476,6 +503,8 @@ def all_apps():
         
 @app.route('/1.1/listing/suggest', methods=['GET'])
 def suggest():
+    if veteris_disabled_check():
+        return jsonify({"error": "Veteris API disabled."}), 404
     query = request.args.get('query', '')
     filtered_apps = [app for app in apps_data if query.lower() in app['name'].lower()]
     response = {
@@ -496,13 +525,14 @@ def suggest():
 #============================#
 @app.route('/icon/<bundleid>', methods=['GET'])
 def app_icon(bundleid):
+    config = loadJson("data/config.json")
     if config["app_icons"] == True:
         icon_path = f"static/icons/{bundleid}.png"
         if os.path.exists(icon_path):
             return send_from_directory(f"static/icons/", f"{bundleid}.png")  
         return send_from_directory("data", "default.png")
-    else:
-        return send_from_directory(f"data", "no_icon.png")
+    elif config["app_icons"] == False:
+        return send_from_directory("data", "no_icon.png")
         
 @app.route('/ipas/<cat>/<ipa>', methods=['GET'])
 def app_ipa(cat, ipa):
@@ -547,6 +577,9 @@ def generatePlist(app, mIOS, version, obscuraFilename):
     
 @app.route('/plist/<bundleid>/<mIOS>/<version>/<obscuraFilename>', methods=['GET'])
 def app_plist(bundleid, mIOS, version, obscuraFilename):
+    config = loadJson("data/config.json")
+    if config["on_device_install_via_web"] == False:
+        return jsonify({"error": "On device install disabled."}), 404
     app = get_app_details_by_bundleid_web(bundleid)
     plist_dict = generatePlist(app, mIOS, version, obscuraFilename)
     plist_data = plistlib.dumps(plist_dict)
@@ -563,6 +596,8 @@ def app_plist(bundleid, mIOS, version, obscuraFilename):
 #============================#
 @app.route('/')
 def home_page():
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
     apps_data = loadJson("data/apps.json")
     recommended_apps = []
     if apps_data != []:
@@ -573,10 +608,14 @@ def home_page():
 
 @app.route('/categories')
 def categories_page():
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
     return render_template('3_Categories.html', section="Categories", categories=all_categories())
 
 @app.route('/category/<category_number>')
 def category_page(category_number):
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
     categories_file = loadJson("data/categories.json")
     category_name = categories_file[category_number]
     apps_in_category = get_apps_by_category(category_number)
@@ -584,14 +623,19 @@ def category_page(category_number):
 
 @app.route('/app/<bundleid>')
 def app_page(bundleid):
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
+    config = loadJson("data/config.json")
     app_info = get_app_details_by_bundleid_web(bundleid)
     if app_info:
-        return render_template('5_App.html', section=app_info["name"], app=app_info, back=True)
+        return render_template('5_App.html', section=app_info["name"], app=app_info, odi=config["on_device_install_via_web"], source=config["source"], back=True)
     else:
         return render_template('7_404.html'), 404
 
 @app.route('/search', methods=['GET'])
 def search():
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
     apps_data = loadJson("data/apps.json")
     query = request.args.get('query', '')
     if query != '':
@@ -605,6 +649,8 @@ def search():
 # ITS AN ABOUT PAGE!!!!!!!!!!!!!!!!!! 
 @app.route('/about')
 def about_page():
+    if web_disabled_check():
+        return jsonify({"error": "Web interface disabled."}), 404
     config = loadJson("data/config.json")
     apps = loadJson("data/apps.json")
     total_apps = sum(len(app.get("versions", [])) for app in apps)
