@@ -82,14 +82,14 @@ Search:
 About:  
 <img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/0ccfe8c3-8094-49c2-9c04-d9278ea09af3" />  
 
-
+## Tested On
+### Server:
+- Windows 11
+- Probably works on Linux and Mac OS (Its python, what could possibly go wrong?)
+### VeterisRedirect:  
+- iPhone 5 running iOS 6
 
 ## Enjoy
-You should now be able to start Veteris, which will connect to your server.
-
-Feel free to submit issues or pull requests for feature suggestions or bug reports.
-
-
-## Other Projects Used
-- [**IPA Sorter**](https://github.com/kawaiizenbo/IPASorter) - Made by kawaiizenbo - I slightly modified the processed ipa's filename. [Version used in this project](https://github.com/Notdbrand/IPASorter)
+You should now be able to start Veteris, which will connect to your server.  
+Submit issues or pull requests for feature suggestions or bug reports.  
 
