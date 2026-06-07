@@ -37,9 +37,11 @@
 		<th>
 			File:
 		</th>
+		{% if odi %}
 		<th>
 			OnDevice:
 		</th>
+		{% endif %}
 		
 	</tr>
 	{% for version_info in app.versions %}
@@ -53,9 +55,11 @@
 			<td>
 				<a href="/ipas/{{ version_info.minIOS }}/{{ version_info.file }}" class="install-btn">Download</a>
 			</td>
+			{% if odi %}
 			<td>
-				<a href="itms-services://?action=download-manifest&url=http://192.168.1.125:5010/plist/{{ app.bundleid }}/{{ version_info.minIOS }}/{{ version_info.app_version }}/{{ version_info.file }}" class="install-btn">Install</a>
+				<a href="itms-services://?action=download-manifest&url={{ source }}/plist/{{ app.bundleid }}/{{ version_info.minIOS }}/{{ version_info.app_version }}/{{ version_info.file }}" class="install-btn">Install</a>
 			</td>
+			{% endif %}
 		</tr>
 	{% endfor %}
 </table>
